@@ -101,7 +101,7 @@ float closest(Point P[], int n)
 // Driver code
 int main()
 {
-    Point P[] = {{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}};
+    Point P[] = {{3, 1}, {7, 1}, {8, 12}, {4, 6}, {5, 11}, {2, 4}};
     int n = sizeof(P) / sizeof(P[0]);
     cout << "The smallest distance is " << closest(P, n) << endl;
     return 0;
