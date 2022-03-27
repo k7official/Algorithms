@@ -1,14 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MXN = 10000;
+const int INF = (int)1e9;
 class Point
 {
 public:
-    int x, y;
+    double x, y;
 
 };
+Point P[MXN];
+int N;
 
-int compareX(const void* a, const void* b)
+/*int compareX(const void* a, const void* b)
 {
     Point *p1 = (Point *)a, *p2 = (Point *)b;
     return (p1->x - p2->x);
@@ -17,6 +21,15 @@ int compareY(const void* a, const void* b)
 {
     Point *p1 = (Point *)a, *p2 = (Point *)b;
     return (p1->y - p2->y);
+}*/
+bool compareX(const Point& l, const Point& r)
+{
+    return l.x < r.x;
+}
+
+bool compareY(const Point& l, const Point& r)
+{
+    return l.y < r.y;
 }
 float dist(Point p1, Point p2)
 {
@@ -41,7 +54,8 @@ float stripClosest(Point strip[], int size, float d)
 {
     float min = d; // Initialize the minimum distance as d
  
-    qsort(strip, size, sizeof(Point), compareY);
+    //qsort(strip, size, sizeof(Point), compareY);
+    sort(P, P + N, compareY);
  
     for (int i = 0; i < size; ++i)
         for (int j = i+1; j < size && (strip[j].y - strip[i].y) < min; ++j)
@@ -91,18 +105,36 @@ float closestUtil(Point P[], int n)
 // This method mainly uses closestUtil()
 float closest(Point P[], int n)
 {
-    qsort(P, n, sizeof(Point), compareX);
+   // qsort(P, n, sizeof(Point), compareX);
+    sort(P, P + N, compareX);
  
     // Use recursive function closestUtil()
     // to find the smallest distance
     return closestUtil(P, n);
 }
  
+void read()
+{
+    for(int i=0; i<N; i++)
+    {
+        cin >> P[i].x >> P[i].y;
+    }
+}
+void solve()
+{
+    double smallest_dist = closest(P, N);
+    if(smallest_dist>=1e4)
+        cout << "INFINITY" << endl;
+    else cout << setprecision(4) << fixed << smallest_dist << endl;
+}
 // Driver code
 int main()
 {
-    Point P[] = {{3, 1}, {7, 1}, {8, 12}, {4, 6}, {5, 11}, {2, 4}};
-    int n = sizeof(P) / sizeof(P[0]);
-    cout << "The smallest distance is " << closest(P, n) << endl;
+    
+    while(cin >> N && N)
+    {
+        read();
+        solve();
+    }
     return 0;
 }
