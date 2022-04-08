@@ -11,8 +11,7 @@ int min(int a, int b){
 int bin(int n, int k){
     int i, j;
     int B[k+1];
-    for(int i=0;i<k+1;i++)B[i]=0;
-    //memset(B, 0, sizeof(B));
+    memset(B, 0, sizeof(B));
     B[0] = 1;
 
     for(i=1; i<=n;i++){
